@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+	<title>TODO List</title>
+</head>
+<body>
+	<nav class="navbar" style="background-color: #e3f2fd;">
+		<a class="navbar-brand" href="#">Todo List</a>
+  </nav>
+  
+<div class="container">
+	<div class="row mt-4">
+			<div class="col">
+				<h2>Add item</h2>
+				<form action="list" method="post" class="form-inline" >
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-md-6"><input  type="text" class=" form-control mb-2 mr-sm-2" name="list_item" placeholder="type here..."></div>
+						<div class="col-md-4"><button  type="submit" class="btn btn-primary mb-2">Submit</button></div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top:30px ;">
+			<div class="col-md-8">
+				<ul class="list-group">
+					{% for item in todo_items %}
+					  <li class="list-group-item">{{item.list_item}}
+					  	<div class="float-end">
+					  		<form action="delete_item/{{item.id}}/" action="post">
+					  			{% csrf_token %}
+					  			<button type="submit" class="btn btn-danger bt-sm">Delete</button>
+					  		</form></div>
+					  	
+					  </li>
+					 {% endfor %}
+				</ul>
+			</div>	
+		</div>
+	  </div>
+</body>
+</html>
+
+
+
+
+
+
